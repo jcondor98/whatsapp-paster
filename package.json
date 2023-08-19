@@ -1,0 +1,25 @@
+{
+  "name": "whatsapp-paster",
+  "version": "1.0.0",
+  "description": "Fix paste in WhatsApp Web (currently only with CTRL+V)",
+  "main": "sources/whatsapp-paster.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "cd sources && zip -r -FS ../target/whatsapp-paster.xpi *"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcondor98/whatsapp-paster.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "web-development",
+    "extension"
+  ],
+  "author": "jcondor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jcondor98/whatsapp-paster/issues"
+  },
+  "homepage": "https://github.com/jcondor98/whatsapp-paster#readme"
+}
