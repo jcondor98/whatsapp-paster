@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "whatsapp-paster",
+  "version": "1.1",
+  "description": "Fix paste in WhatsApp Web",
+  "author": "jcondor",
+  "homepage_url": "https://github.com/jcondor98/whatsapp-paster",
+
+  "content_scripts": [
+    {
+      "matches": ["*://web.whatsapp.com/*"],
+      "js": ["whatsapp-paster.js"]
+    }
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{03c84d10-5486-420f-815f-da9f502a3708}"
+    }
+  }
+}
