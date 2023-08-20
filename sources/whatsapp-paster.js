@@ -22,15 +22,7 @@
  *
  */
 async function paste(evt) {
-  if (!isPressedCtrlV())
-    return
-
-  const messageBox = document.querySelector('[data-testid=conversation-compose-box-input]')
-  console.debug('Selected inner box', messageBox)
-  if (!isFocusedElement()) {
-    console.debug('Message input box is not the currently focused element')
-    return
-  }
+  evt.preventDefault()
 
   console.debug('Trying to paste text from clipboard')
   const textToPaste = await navigator.clipboard.readText()
@@ -38,14 +30,20 @@ async function paste(evt) {
   console.debug('Pasting: ', textToPaste)
   document.execCommand('insertText', false, textToPaste);
   console.debug('Text from clipboard was inserted')
-
-  function isPressedCtrlV() {
-    return  evt.ctrlKey && evt.key === 'v'
-  }
-
-  function isFocusedElement() {
-    return document.activeElement === messageBox
-  }
 }
 
-document.addEventListener('keydown', paste);
+document.addEventListener("DOMNodeInserted", evt => {
+  const element = evt.target
+  const testid = element.getAttribute?.call(element, 'data-testid')
+  if (testid !== 'conversation-panel-wrapper')
+    return
+
+  const messageBox = element.querySelector('[data-testid=conversation-compose-box-input]')
+  if (!messageBox) {
+    console.warn('No message box found in conversation panel')
+    return
+  }
+
+  console.debug('Applying paste callback on message box:', messageBox)
+  messageBox.addEventListener('paste', paste)
+})
